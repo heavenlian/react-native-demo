@@ -1,0 +1,33 @@
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+platform :ios, '10.0'
+
+target 'AweLian' do
+  config = use_native_modules!
+  pod 'boost-for-react-native', :git => 'https://gitee.com/damon-s/boost-for-react-native.git’
+  use_react_native!(:path => config["reactNativePath"])
+
+  target 'AweLianTests' do
+    inherit! :complete
+    # Pods for testing
+  end
+
+  # Enables Flipper.
+  #
+  # Note that if you have use_frameworks! enabled, Flipper will not work and
+  # you should disable these next few lines.
+  use_flipper!
+  post_install do |installer|
+    flipper_post_install(installer)
+  end
+end
+
+target 'AweLian-tvOS' do
+  # Pods for AweLian-tvOS
+
+  target 'AweLian-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end
